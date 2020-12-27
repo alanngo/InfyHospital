@@ -1,19 +1,13 @@
 package com.infy.hopspital.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
-@Document
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Doctor
+@Document
+public class Patient
 {
     @Id
     private String id;
@@ -22,8 +16,5 @@ public class Doctor
     private String name;
 
     @EqualsAndHashCode.Exclude
-    private Integer numYears;
-
-    @EqualsAndHashCode.Exclude
-    private List<Patient> patients;
+    private String reason;
 }

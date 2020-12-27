@@ -1,6 +1,7 @@
 package com.infy.hopspital.api;
 
 import com.infy.hopspital.dto.DoctorDTO;
+import com.infy.hopspital.dto.PatientDTO;
 import com.infy.hopspital.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.HttpStatus.*;
@@ -36,6 +37,20 @@ public class HospitalAPI
     {
         List<DoctorDTO> doctors = hospitalService.getAllDoctors();
         return new ResponseEntity<>(doctors, OK);
+    }
+
+    @PostMapping("/patients")
+    public ResponseEntity<PatientDTO> addPatient(@RequestBody PatientDTO patientDTO)
+    {
+        hospitalService.addPatient(patientDTO);
+        return new ResponseEntity<>(patientDTO, CREATED);
+    }
+
+    @PutMapping("/doctors/{patientId}/{doctorId}")
+    public ResponseEntity<DoctorDTO> allocatePatient(@PathVariable String patientId, @PathVariable String doctorId)
+    {
+        DoctorDTO tmp = hospitalService.allocatePatient(patientId, doctorId);
+        return new ResponseEntity<>(tmp, CREATED);
     }
 
 }
